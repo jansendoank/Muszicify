@@ -7,22 +7,42 @@ const FullPlayer={
                 <button onclick="FullPlayer.close()" class="text-white/70 hover:text-white hover:bg-white/10 p-3 rounded-full active:scale-90 transition-all duration-200"><i data-lucide="chevron-down" class="w-7 h-7"></i></button>
                 <div class="text-center"><p class="text-[10px] uppercase tracking-[0.2em] text-[#b3b3b3]">Now Playing</p><p id="full-header-artist" class="text-sm font-bold truncate max-w-[200px]"></p></div>
                 <div class="flex gap-1">
-                    <button onclick="shareTrack()" class="text-white/70 hover:text-white hover:bg-white/10 p-3 rounded-full active:scale-90 transition-all"><i data-lucide="share-2" class="w-5 h-5"></i></button>
+                    <button onclick="openShareCard()" class="text-white/70 hover:text-white hover:bg-white/10 p-3 rounded-full active:scale-90 transition-all" title="Bagikan Lagu (Share Card)"><i data-lucide="share-2" class="w-5 h-5"></i></button>
                     <button onclick="toggleLyrics()" class="text-white/70 hover:text-white hover:bg-white/10 p-3 rounded-full active:scale-90 transition-all"><i data-lucide="align-left" class="w-6 h-6"></i></button>
                 </div>
             </div>
             <div class="relative z-10 flex-1 flex items-center justify-center px-8" style="min-height:0;overflow:hidden;">
                 <div class="relative w-full max-w-[300px] aspect-square"><img id="full-cover" src="" class="w-full h-full object-cover rounded-3xl shadow-2xl shadow-black/50 transition-transform duration-500" /></div>
             </div>
-            <div class="relative z-10 px-6 pb-4 flex-shrink-0">
+            <div class="relative z-10 px-6 pb-2 flex-shrink-0">
                 <div class="flex justify-between items-start mb-3">
-                    <div class="flex-1 truncate"><h2 id="full-title" class="text-lg font-bold text-white truncate">Pilih lagu</h2><p id="full-artist" class="text-[#b3b3b3] text-sm truncate cursor-pointer hover:text-[#cfd3d8]" onclick="FullPlayer.openArtist()"></p></div>
-                    <div class="flex gap-1">
-                        <button onclick="addCurrentToPlaylist()" class="text-[#cfd3d8] hover:text-white active:scale-90 p-2 transition" title="Tambah ke Playlist"><i data-lucide="list-plus" class="w-5 h-5"></i></button>
-                        <button onclick="toggleLyrics()" class="text-[#cfd3d8] hover:text-white active:scale-90 p-2 transition"><i data-lucide="mic-2" class="w-5 h-5"></i></button>
-                    </div>
+                    <div class="flex-1 truncate"><h2 id="full-title" class="text-xl font-bold text-white truncate">Pilih lagu</h2><p id="full-artist" class="text-[#b3b3b3] text-sm truncate cursor-pointer hover:text-[#cfd3d8] mt-0.5" onclick="FullPlayer.openArtist()"></p></div>
                 </div>
                 <div class="mb-2"><div class="relative w-full h-1.5 bg-white/10 rounded-full flex items-center group cursor-pointer"><input type="range" id="seek-bar" min="0" max="100" value="0" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer z-10" oninput="SK(this.value)" /><div id="full-progress" class="h-full bg-gradient-to-r from-[#cfd3d8] to-[#e8eaed] rounded-l-full" style="width:0%;box-shadow:0 0 10px rgba(207,211,216,0.5);"><div class="absolute -right-2 top-1/2 -translate-y-1/2 w-4 h-4 bg-white rounded-full shadow-xl shadow-[#cfd3d8]/50 opacity-0 group-hover:opacity-100 transition-all"></div></div></div><div class="flex justify-between text-[10px] text-[#6b7280] mt-1"><span id="time-curr">0:00</span><span id="time-dur">0:00</span></div></div>
+            </div>
+            <!-- Premium Utility Bar -->
+            <div class="relative z-10 px-8 flex justify-around items-center mb-4 flex-shrink-0 border-t border-b border-white/5 py-2">
+                <button onclick="openEqualizer()" class="flex flex-col items-center gap-1 text-[#a0a5b0] hover:text-white transition active:scale-90" title="Equalizer">
+                    <i data-lucide="sliders" class="w-4.5 h-4.5"></i>
+                    <span class="text-[9px] font-semibold tracking-wider uppercase opacity-80 mt-0.5">EQ</span>
+                </button>
+                <button onclick="openSleepTimer()" class="flex flex-col items-center gap-1 text-[#a0a5b0] hover:text-white transition active:scale-90 relative" title="Timer Tidur">
+                    <i data-lucide="clock" class="w-4.5 h-4.5"></i>
+                    <span class="text-[9px] font-semibold tracking-wider uppercase opacity-80 mt-0.5" id="sleep-badge">Timer</span>
+                    <span id="sleep-dot" class="hidden absolute top-0.5 right-2 w-1.5 h-1.5 bg-[#1ed760] rounded-full"></span>
+                </button>
+                <button onclick="openPlaybackSpeed()" class="flex flex-col items-center gap-1 text-[#a0a5b0] hover:text-white transition active:scale-90" title="Kecepatan Putar">
+                    <i data-lucide="gauge" class="w-4.5 h-4.5"></i>
+                    <span class="text-[9px] font-semibold tracking-wider uppercase opacity-80 mt-0.5" id="speed-badge">Normal</span>
+                </button>
+                <button onclick="addCurrentToPlaylist()" class="flex flex-col items-center gap-1 text-[#a0a5b0] hover:text-white transition active:scale-90" title="Tambah ke Playlist">
+                    <i data-lucide="list-plus" class="w-4.5 h-4.5"></i>
+                    <span class="text-[9px] font-semibold tracking-wider uppercase opacity-80 mt-0.5">Playlist</span>
+                </button>
+                <button onclick="toggleLyrics()" class="flex flex-col items-center gap-1 text-[#a0a5b0] hover:text-white transition active:scale-90" title="Lirik Lagu">
+                    <i data-lucide="mic-2" class="w-4.5 h-4.5"></i>
+                    <span class="text-[9px] font-semibold tracking-wider uppercase opacity-80 mt-0.5">Lirik</span>
+                </button>
             </div>
             <div class="relative z-10 px-8 flex items-center justify-between mb-6 flex-shrink-0">
                 <button onclick="toggleAutoNext()" class="text-[#6b7280] hover:text-[#cfd3d8] active:scale-90 p-2 transition-all duration-200" title="Auto Next"><i data-lucide="list-end" class="w-5 h-5"></i></button>
@@ -49,7 +69,7 @@ const FullPlayer={
         </div>`;
         lucide.createIcons();
     },
-    open(){var fp=gid('full-player');fp.style.display='flex';document.body.style.overflow='hidden';document.body.style.position='fixed';document.body.style.width='100%';requestAnimationFrame(function(){fp.style.transform='translateY(0)';});MP.hide();},
+    open(){var fp=gid('full-player');fp.style.display='flex';document.body.style.overflow='hidden';document.body.style.position='fixed';document.body.style.width='100%';requestAnimationFrame(function(){fp.style.transform='translateY(0)';});MP.hide();try{updateSleepBadge();updateSpeedBadge();}catch(e){}},
     close(){var fp=gid('full-player');fp.style.transform='translateY(100%)';document.body.style.overflow='';document.body.style.position='';document.body.style.width='';setTimeout(function(){fp.style.display='none';MP.show();},350);},
     openArtist(){if(S.ct&&S.ct.artistId){FullPlayer.close();setTimeout(function(){Artist.open(S.ct.artistId,S.ct.artist);},400);}}
 };

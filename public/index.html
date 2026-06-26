@@ -317,6 +317,70 @@
         .splash-bar { margin-top: 24px; width: 120px; height: 2px; border-radius: 2px; background: rgba(30,215,96,0.15); overflow: hidden; }
         .splash-bar i { display: block; height: 100%; width: 40%; background: linear-gradient(90deg, transparent, #1ed760, transparent); animation: splashBar 1.4s ease-in-out infinite; }
         @keyframes splashBar { 0% { transform: translateX(-100%); } 100% { transform: translateX(250%); } }
+
+        /* Premium Lyric Highlighting Styling */
+        .lyric-line {
+            transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            transform-origin: left center;
+            border-left: 3px solid transparent;
+            border-radius: 4px;
+        }
+        .lyric-line.active-lyric {
+            color: var(--text-primary) !important;
+            font-size: 1.15rem !important;
+            font-weight: 800 !important;
+            opacity: 1 !important;
+            border-left-color: #a0a5b0 !important;
+            padding-left: 12px !important;
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
+            background: rgba(255, 255, 255, 0.03);
+        }
+        .theme-light .lyric-line.active-lyric {
+            border-left-color: #2d3748 !important;
+            background: rgba(0, 0, 0, 0.03);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Neumorphic Equalizer & Slider styling */
+        .eq-slider {
+            -webkit-appearance: none;
+            width: 8px;
+            height: 150px;
+            background: var(--bg-color);
+            box-shadow: var(--nm-shadow-inset-sm);
+            border-radius: 4px;
+            outline: none;
+            writing-mode: bt-lr; /* IE */
+            -webkit-appearance: slider-vertical; /* WebKit */
+        }
+        .eq-slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--bg-color);
+            box-shadow: var(--nm-shadow-flat-sm);
+            border: 2px solid var(--border-color);
+            cursor: pointer;
+            transition: transform 0.1s;
+        }
+        .eq-slider::-webkit-slider-thumb:active {
+            transform: scale(1.15);
+            box-shadow: var(--nm-shadow-inset-sm);
+        }
+
+        /* Equalizer live-animated bar visualizer */
+        .eq-bar {
+            width: 5px;
+            height: 10px;
+            background: linear-gradient(to top, #6b7280, #ffffff);
+            border-radius: 2px;
+            transition: height 0.1s ease-out;
+        }
+        .theme-light .eq-bar {
+            background: linear-gradient(to top, #a0aec0, #2d3748);
+        }
     </style>
 </head>
 <body class="h-[100dvh] w-full bg-transparent text-white font-sans overflow-hidden flex flex-col">
