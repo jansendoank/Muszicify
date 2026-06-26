@@ -88,6 +88,7 @@ const App={
     switch(t){
         S.at=t;['home','search','library','dev'].forEach(function(id){gid('view-'+id).style.display='none';});
         if(t==='library'){Library.render();}
+        if(t==='home'){Home.render();}
         gid('view-'+t).style.display='block';
         ['home','search','library','dev'].forEach(function(n){var b=gid('nav-'+n);if(!b)return;b.classList.remove('text-[#cfd3d8]');b.classList.add('text-[#6b7280]');var i=b.querySelector('i, svg');if(i)i.classList.remove('fill-current');});
         var ab=gid('nav-'+t);if(!ab)return;ab.classList.remove('text-[#6b7280]');ab.classList.add('text-[#cfd3d8]');if(t==='home'){var icon=ab.querySelector('i, svg');if(icon)icon.classList.add('fill-current');}

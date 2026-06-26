@@ -30,7 +30,24 @@ const Home={
     show(){
         var g=gid('home-grid'),s=gid('home-scroll');if(!g||!s)return;
         g.innerHTML=S.ht.slice(0,6).map(function(t,i){return'<div onclick="PK(\'home1\','+i+')" class="glass glass-hover rounded-xl flex items-center gap-3 p-2 cursor-pointer active:scale-95 animate-stagger" style="animation-delay:'+(i*50)+'ms"><img src="'+t.cover+'" class="w-14 h-14 rounded-lg object-cover shadow-lg" onerror="this.src=\''+FI+'\'" /><span class="font-bold text-sm line-clamp-2">'+es(t.title)+'</span></div>';}).join('');
-        s.innerHTML=S.ht.slice(6,12).map(function(t,i){return'<div onclick="PK(\'home2\','+i+')" class="flex-shrink-0 w-40 cursor-pointer active:scale-95 animate-stagger" style="animation-delay:'+((i+6)*50)+'ms"><div class="w-40 h-40 mb-2 relative rounded-xl overflow-hidden glass-edge"><img src="'+t.cover+'" class="w-full h-full object-cover" onerror="this.src=\''+FI+'\'" /><div class="absolute bottom-2 right-2 btn-chrome rounded-full p-3 opacity-0 hover:opacity-100 transition-all shadow-lg shadow-black/40"><i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i></div></div><h3 class="font-semibold text-sm truncate">'+es(t.title)+'</h3><p class="text-[#6b7280] text-xs truncate mt-1">'+es(t.artist)+'</p></div>';}).join('');
+        
+        var pls=getUserPlaylists();
+        var plHtml='';
+        
+        // Tampilkan playlist yang dibuat pengguna
+        pls.forEach(function(p, i){
+            plHtml+='<div onclick="App.switch(\'library\');Library.open(\''+p.id+'\')" class="flex-shrink-0 w-40 cursor-pointer active:scale-95 animate-stagger" style="animation-delay:'+(i*50)+'ms"><div class="w-40 h-40 mb-2 relative rounded-xl overflow-hidden glass-edge"><img src="'+(p.image||FI)+'" class="w-full h-full object-cover" onerror="this.src=\''+FI+'\'" /><div class="absolute bottom-2 right-2 btn-chrome rounded-full p-3 opacity-0 hover:opacity-100 transition-all shadow-lg shadow-black/40"><i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i></div></div><h3 class="font-semibold text-sm truncate">'+es(p.name)+'</h3><p class="text-[#6b7280] text-xs truncate mt-1">'+p.songs.length+' lagu</p></div>';
+        });
+
+        // Tampilkan tombol Buat Playlist Baru sebagai card
+        plHtml+='<div onclick="App.switch(\'library\');Library.createNew()" class="flex-shrink-0 w-40 cursor-pointer active:scale-95 flex flex-col"><div class="w-40 h-40 mb-2 relative rounded-xl overflow-hidden glass flex flex-col items-center justify-center border border-dashed border-white/20 hover:border-white/40"><i data-lucide="plus" class="w-8 h-8 text-[#6b7280]"></i><span class="text-xs text-[#6b7280] mt-2">Buat Playlist</span></div><h3 class="font-semibold text-sm truncate text-[#6b7280]">Buat Baru</h3></div>';
+
+        // Tampilkan rekomendasi tambahan sebagai mix/album playlist
+        S.ht.slice(6,12).forEach(function(t,i){
+            plHtml+='<div onclick="PK(\'home2\','+i+')" class="flex-shrink-0 w-40 cursor-pointer active:scale-95 animate-stagger" style="animation-delay:'+((i+pls.length+1)*50)+'ms"><div class="w-40 h-40 mb-2 relative rounded-xl overflow-hidden glass-edge"><img src="'+t.cover+'" class="w-full h-full object-cover" onerror="this.src=\''+FI+'\'" /><div class="absolute bottom-2 right-2 btn-chrome rounded-full p-3 opacity-0 hover:opacity-100 transition-all shadow-lg shadow-black/40"><i data-lucide="play" class="w-5 h-5 fill-current ml-0.5"></i></div></div><h3 class="font-semibold text-sm truncate">'+es(t.title)+'</h3><p class="text-[#6b7280] text-xs truncate mt-1">'+es(t.artist)+'</p></div>';
+        });
+
+        s.innerHTML=plHtml;
         lucide.createIcons();
     },
     refresh(){Home.fetch();gid('main-area').scrollTop=0;}
