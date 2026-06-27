@@ -27,9 +27,9 @@ const App={
         
         gid('view-dev').innerHTML=`
         <div class="pt-12 px-4 text-center">
-            <div onclick="App.viewAvatar('/jansen_avatar.jpg?v=4', 'Jansen')" class="relative w-24 h-24 rounded-full mx-auto mb-6 glass-strong shine-sweep flex items-center justify-center overflow-hidden shadow-2xl shadow-black/50 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 animate-fade-in" title="Klik untuk memperbesar">
+            <div onclick="App.viewAvatar('/jansen_avatar.jpg?v=5', 'Jansen')" class="relative w-24 h-24 rounded-full mx-auto mb-6 glass-strong shine-sweep flex items-center justify-center overflow-hidden shadow-2xl shadow-black/50 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 animate-fade-in" title="Klik untuk memperbesar">
                 <i data-lucide="music" class="w-12 h-12 text-white/60 absolute"></i>
-                <img src="/jansen_avatar.jpg?v=4" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'" />
+                <img src="/jansen_avatar.jpg?v=5" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'" />
             </div>
             <h1 class="text-3xl font-black chrome-text mb-1">Muszicify</h1>
             <p class="text-[#b3b3b3] text-sm mb-6">Streaming Musik YouTube dengan Lirik</p>
@@ -45,16 +45,16 @@ const App={
             <div class="glass rounded-2xl p-5 max-w-sm mx-auto space-y-3 text-left mb-6">
                 <h3 class="text-[#cfd3d8] font-bold text-sm uppercase tracking-wider mb-2">👥 Kontributor</h3>
                 <div class="flex justify-between items-center">
-                    <span class="text-[#6b7280] text-sm">Developed by</span>
-                    <div onclick="App.viewAvatar('/nanzz_avatar.jpg?v=4', 'nanzz')" class="flex items-center gap-3 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
-                        <img src="/nanzz_avatar.jpg?v=4" class="w-12 h-12 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=nanzz'" />
+                     <span class="text-[#6b7280] text-sm">Developed by</span>
+                    <div onclick="App.viewAvatar('/nanzz_avatar.jpg?v=5', 'nanzz')" class="flex items-center gap-3 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
+                        <img src="/nanzz_avatar.jpg?v=5" class="w-12 h-12 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=nanzz'" />
                         <span class="text-white font-medium text-sm">nanzz</span>
                     </div>
                 </div>
                 <div class="flex justify-between items-center">
                     <span class="text-[#6b7280] text-sm">Customs & add New Features by</span>
-                    <div onclick="App.viewAvatar('/jansen_avatar.jpg?v=4', 'Jansen')" class="flex items-center gap-3 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
-                        <img src="/jansen_avatar.jpg?v=4" class="w-12 h-12 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Jansen'" />
+                    <div onclick="App.viewAvatar('/jansen_avatar.jpg?v=5', 'Jansen')" class="flex items-center gap-3 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
+                        <img src="/jansen_avatar.jpg?v=5" class="w-12 h-12 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Jansen'" />
                         <span class="text-white font-medium text-sm">Jansen</span>
                     </div>
                 </div>
