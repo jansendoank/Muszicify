@@ -41,7 +41,6 @@ function ys(e){
 // ---- AUDIO ENGINE SERVER 2 (elemen <audio> native, sumber stream dari /api/ytplay) ----
 var AU=gid('audio-player');
 if(!AU){AU=document.createElement('audio');AU.id='audio-player';AU.preload='auto';AU.style.display='none';document.body.appendChild(AU);}
-AU.crossOrigin = "anonymous";
 AU.addEventListener('play',function(){if(S.server==='2'){S.ip=true;S.il=false;UB();SP();try{AU.playbackRate=S.playbackRate||1.0;}catch(ex){}}});
 AU.addEventListener('pause',function(){if(S.server==='2'&&!AU.ended){S.ip=false;UB();ST();}});
 AU.addEventListener('waiting',function(){if(S.server==='2'){S.il=true;UB();}});
@@ -134,7 +133,15 @@ async function playViaServer2(track,resumeAt){
         var d=await r.json();
         if(S.ct!==track)return; // user udah pindah lagu sebelum fetch ini selesai
         if(d&&d.status&&d.result&&d.result.download&&d.result.download.audio){
-            AU.src='/api/proxy-audio?url='+encodeURIComponent(d.result.download.audio);
+            var audioUrl = d.result.download.audio;
+            if (audioCtx) {
+                // Gunakan proxy audio agar Web Audio Equalizer dapat memproses audio cross-origin
+                AU.src = '/api/proxy-audio?url=' + encodeURIComponent(audioUrl);
+            } else {
+                // Lepaskan properti crossOrigin agar browser memutar link langsung tanpa hambatan CORS
+                AU.removeAttribute('crossorigin');
+                AU.src = audioUrl;
+            }
             if(resumeAt){
                 var onMeta=function(){AU.currentTime=resumeAt;AU.removeEventListener('loadedmetadata',onMeta);};
                 AU.addEventListener('loadedmetadata',onMeta);
@@ -605,7 +612,14 @@ function openEqualizer() {
     if (!S.activePreset) S.activePreset = 'Normal';
     
     if (S.server === '2') {
+        var hadAudioCtx = !!audioCtx;
         setupWebAudioEQ();
+        if (!hadAudioCtx && audioCtx && S.ct && !AU.paused) {
+            // Jika audioCtx baru aktif, muat ulang lagu saat ini menggunakan proxy agar filter EQ berfungsi
+            var currTime = AU.currentTime;
+            showToast('🎚️ Mengaktifkan Equalizer...');
+            loadTrack(S.ct, currTime);
+        }
     }
     
     var popup = document.createElement('div');
