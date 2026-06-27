@@ -37,7 +37,7 @@ const App={
             <div class="glass rounded-2xl p-5 max-w-sm mx-auto space-y-3 text-left mb-6">
                 <h3 class="text-[#cfd3d8] font-bold text-sm uppercase tracking-wider mb-2">📱 Aplikasi</h3>
                 <div class="flex justify-between"><span class="text-[#6b7280] text-sm">Nama</span><span class="text-white font-medium text-sm">Muszicify</span></div>
-                <div class="flex justify-between"><span class="text-[#6b7280] text-sm">Versi</span><span class="text-white font-medium text-sm">v2.0.0</span></div>
+                <div class="flex justify-between"><span class="text-[#6b7280] text-sm">Versi</span><span class="text-white font-medium text-sm">v3.0.0</span></div>
                 <div class="flex justify-between"><span class="text-[#6b7280] text-sm">Framework</span><span class="text-white font-medium text-sm">HTML + Tailwind + JS</span></div>
                 <div class="flex justify-between"><span class="text-[#6b7280] text-sm">Hosting</span><span class="text-white font-medium text-sm">Vercel</span></div>
             </div>
@@ -111,6 +111,98 @@ const App={
         ['home','search','library','dev'].forEach(function(n){var b=gid('nav-'+n);if(!b)return;b.classList.remove('text-[#cfd3d8]');b.classList.add('text-[#6b7280]');var i=b.querySelector('i, svg');if(i)i.classList.remove('fill-current');});
         var ab=gid('nav-'+t);if(!ab)return;ab.classList.remove('text-[#6b7280]');ab.classList.add('text-[#cfd3d8]');if(t==='home'){var icon=ab.querySelector('i, svg');if(icon)icon.classList.add('fill-current');}
         gid('main-area').scrollTop=0;lucide.createIcons();
+    },
+    showV3Popup() {
+        if(localStorage.getItem('seen_v3_popup_update')) return;
+        var popup = document.createElement('div');
+        popup.id = 'v3-popup';
+        popup.className = 'fixed inset-0 z-[400] flex items-center justify-center bg-black/80 px-4';
+        popup.style.backdropFilter = 'blur(8px)';
+        popup.innerHTML = `
+            <div class="glass-strong w-full max-w-sm rounded-3xl p-6 border border-white/10 text-center relative overflow-hidden" style="animation: slideUp 0.3s ease-out forwards;">
+                <!-- Header -->
+                <div class="relative w-16 h-16 rounded-full mx-auto mb-4 bg-gradient-to-tr from-rose-500 to-amber-500 flex items-center justify-center shadow-lg shadow-rose-500/20">
+                    <i data-lucide="sparkles" class="w-8 h-8 text-white"></i>
+                </div>
+                
+                <h2 class="text-2xl font-black chrome-text mb-1">New Version v3 🚀</h2>
+                <p class="text-[#6b7280] text-xs mb-5">Berikut adalah fitur dan pembaruan terbaru:</p>
+                
+                <!-- Features list -->
+                <div class="space-y-4 text-left mb-6 max-h-[250px] overflow-y-auto pr-1">
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="sliders" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Equalizer Suara (Web Audio)</h4>
+                            <p class="text-[#b3b3b3] text-xs leading-relaxed">Sesuaikan Bass, Mid, Treble, dan gunakan berbagai Preset Keren untuk kualitas audio musik terbaik.</p>
+                        </div>
+                    </div>
+                    
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="share-2" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Share Lagu via Link Audio Langsung</h4>
+                            <p class="text-[#b3b3b3] text-xs leading-relaxed">Bagikan lagu favorit Anda menggunakan link audio langsung untuk kemudahan berbagi musik.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="timer" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Timer Sleep (Pengantar Tidur)</h4>
+                            <p class="text-[#b3b3b3] text-xs leading-relaxed">Atur waktu putar musik otomatis sebelum tidur dengan durasi yang dapat ditentukan sendiri.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="shield-check" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Fitur Pintar: "Hentikan di Akhir Lagu"</h4>
+                            <p class="text-[#b3b3b3] text-xs leading-relaxed">Dilengkapi opsi agar lagu aktif Anda tetap berputar sampai selesai sebelum pemutaran otomatis berhenti tanpa memotong lagu di tengah-tengah.</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="gauge" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Kontrol Kecepatan Putar</h4>
+                            <p class="text-[#b3b3b3] text-xs leading-relaxed">Memungkinkan Anda mempercepat atau memperlambat musik sesuai kebutuhan (mendukung kecepatan 0.5x, 0.75x, 1.0x (Normal), 1.25x, 1.5x, 1.75x, hingga 2.0x).</p>
+                        </div>
+                    </div>
+
+                    <div class="flex items-start gap-3">
+                        <div class="w-6 h-6 rounded-lg bg-white/5 flex items-center justify-center shrink-0 mt-0.5">
+                            <i data-lucide="zap" class="w-4 h-4 text-rose-400"></i>
+                        </div>
+                        <div>
+                            <h4 class="text-white font-bold text-sm">Mode "Slowed + Reverb" & "Nightcore"</h4>
+                            <p class="text-[#b3b3b3] text-xs leading-relaxed">Kustomisasi getaran audio dengan mengubah kecepatan musik secara instan ke gaya favorit Anda.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Button -->
+                <button id="close-v3-popup" class="w-full btn-chrome font-bold py-3.5 rounded-full active:scale-95 transition-all">
+                    Keren, Mulai Dengar! 🎵
+                </button>
+            </div>
+        `;
+        document.body.appendChild(popup);
+        lucide.createIcons();
+        popup.querySelector('#close-v3-popup').onclick = function() {
+            localStorage.setItem('seen_v3_popup_update', 'true');
+            popup.remove();
+        };
     }
 };
 App.init();Home.fetch();
@@ -133,7 +225,11 @@ App.init();Home.fetch();
     }
     setTimeout(function(){
         sp.classList.add('hide');
-        setTimeout(function(){ if(sp&&sp.parentNode) sp.parentNode.removeChild(sp); },350);
+        setTimeout(function(){ 
+            if(sp&&sp.parentNode) sp.parentNode.removeChild(sp); 
+            // Trigger V3 Update popup here
+            App.showV3Popup();
+        },350);
     },300);
 })();
 
