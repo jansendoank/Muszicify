@@ -27,7 +27,7 @@ const App={
         
         gid('view-dev').innerHTML=`
         <div class="pt-12 px-4 text-center">
-            <div class="relative w-24 h-24 rounded-full mx-auto mb-6 glass-strong shine-sweep flex items-center justify-center overflow-hidden shadow-2xl shadow-black/50">
+            <div onclick="App.viewAvatar('jansen_avatar.jpg', 'Jansen')" class="relative w-24 h-24 rounded-full mx-auto mb-6 glass-strong shine-sweep flex items-center justify-center overflow-hidden shadow-2xl shadow-black/50 cursor-pointer hover:scale-105 active:scale-95 transition-all duration-300 animate-fade-in" title="Klik untuk memperbesar">
                 <i data-lucide="music" class="w-12 h-12 text-white/60 absolute"></i>
                 <img src="jansen_avatar.jpg" class="absolute inset-0 w-full h-full object-cover" onerror="this.style.display='none'" />
             </div>
@@ -46,15 +46,15 @@ const App={
                 <h3 class="text-[#cfd3d8] font-bold text-sm uppercase tracking-wider mb-2">👥 Kontributor</h3>
                 <div class="flex justify-between items-center">
                     <span class="text-[#6b7280] text-sm">Developed by</span>
-                    <div class="flex items-center gap-2">
-                        <img src="/dev.png" class="w-6 h-6 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=nanzz'" />
+                    <div onclick="App.viewAvatar('nanzz_avatar.jpg', 'nanzz')" class="flex items-center gap-2 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
+                        <img src="nanzz_avatar.jpg" class="w-8 h-8 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=nanzz'" />
                         <span class="text-white font-medium text-sm">nanzz</span>
                     </div>
                 </div>
                 <div class="flex justify-between items-center">
                     <span class="text-[#6b7280] text-sm">Customs & add New Features by</span>
-                    <div class="flex items-center gap-2">
-                        <img src="jansen_avatar.jpg" class="w-6 h-6 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Jansen'" />
+                    <div onclick="App.viewAvatar('jansen_avatar.jpg', 'Jansen')" class="flex items-center gap-2 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
+                        <img src="jansen_avatar.jpg" class="w-8 h-8 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Jansen'" />
                         <span class="text-white font-medium text-sm">Jansen</span>
                     </div>
                 </div>
@@ -202,6 +202,69 @@ const App={
         popup.querySelector('#close-v3-popup').onclick = function() {
             localStorage.setItem('seen_v3_popup_update', 'true');
             popup.remove();
+        };
+    },
+    viewAvatar(imgUrl, name) {
+        var existing = gid('avatar-viewer-popup');
+        if (existing) existing.remove();
+        
+        var popup = document.createElement('div');
+        popup.id = 'avatar-viewer-popup';
+        popup.className = 'fixed inset-0 z-[500] flex flex-col items-center justify-center bg-black/95 px-4 animate-fade-in';
+        popup.style.backdropFilter = 'blur(12px)';
+        popup.innerHTML = `
+            <style>
+            @keyframes zoomIn {
+                from { opacity: 0; transform: scale(0.9); }
+                to { opacity: 1; transform: scale(1); }
+            }
+            @keyframes zoomOut {
+                from { opacity: 1; transform: scale(1); }
+                to { opacity: 0; transform: scale(0.95); }
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+            @keyframes fadeOut {
+                from { opacity: 1; }
+                to { opacity: 0; }
+            }
+            .animate-fade-in { animation: fadeIn 0.2s ease-out forwards; }
+            .animate-fade-out { animation: fadeOut 0.2s ease-in forwards; }
+            </style>
+            <div class="relative w-full max-w-sm flex flex-col items-center justify-center" style="animation: zoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;">
+                <!-- Close Button -->
+                <button id="close-avatar-viewer" class="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 active:scale-90 flex items-center justify-center text-white transition-all cursor-pointer z-50">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+                
+                <!-- Card Container -->
+                <div class="glass-strong p-4 rounded-3xl border border-white/10 w-full flex flex-col items-center shadow-2xl shadow-black/80">
+                    <!-- Image Wrapper -->
+                    <div class="relative w-full aspect-square rounded-2xl overflow-hidden mb-4 border border-white/5 bg-black/40">
+                        <img src="${imgUrl}" class="w-full h-full object-cover transition-all duration-300" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=' + name" />
+                    </div>
+                    <!-- Label -->
+                    <h3 class="text-xl font-black text-white tracking-wide">${name}</h3>
+                    <p class="text-[#6b7280] text-xs uppercase tracking-wider mt-1">Kontributor Muszicify</p>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(popup);
+        lucide.createIcons();
+        
+        popup.querySelector('#close-avatar-viewer').onclick = function() {
+            popup.classList.add('animate-fade-out');
+            popup.children[1].style.animation = 'zoomOut 0.2s ease-in forwards';
+            setTimeout(function() {
+                popup.remove();
+            }, 200);
+        };
+        popup.onclick = function(e) {
+            if (e.target === popup) {
+                popup.querySelector('#close-avatar-viewer').click();
+            }
         };
     }
 };
