@@ -46,15 +46,15 @@ const App={
                 <h3 class="text-[#cfd3d8] font-bold text-sm uppercase tracking-wider mb-2">👥 Kontributor</h3>
                 <div class="flex justify-between items-center">
                     <span class="text-[#6b7280] text-sm">Developed by</span>
-                    <div onclick="App.viewAvatar('nanzz_avatar.jpg', 'nanzz')" class="flex items-center gap-2 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
-                        <img src="nanzz_avatar.jpg" class="w-8 h-8 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=nanzz'" />
+                    <div onclick="App.viewAvatar('nanzz_avatar.jpg', 'nanzz')" class="flex items-center gap-3 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
+                        <img src="nanzz_avatar.jpg" class="w-12 h-12 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/bottts/svg?seed=nanzz'" />
                         <span class="text-white font-medium text-sm">nanzz</span>
                     </div>
                 </div>
                 <div class="flex justify-between items-center">
                     <span class="text-[#6b7280] text-sm">Customs & add New Features by</span>
-                    <div onclick="App.viewAvatar('jansen_avatar.jpg', 'Jansen')" class="flex items-center gap-2 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
-                        <img src="jansen_avatar.jpg" class="w-8 h-8 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Jansen'" />
+                    <div onclick="App.viewAvatar('jansen_avatar.jpg', 'Jansen')" class="flex items-center gap-3 cursor-pointer hover:opacity-80 active:scale-95 transition-all duration-200" title="Klik untuk memperbesar">
+                        <img src="jansen_avatar.jpg" class="w-12 h-12 rounded-full object-cover border border-white/10" referrerPolicy="no-referrer" onerror="this.src='https://api.dicebear.com/7.x/avataaars/svg?seed=Jansen'" />
                         <span class="text-white font-medium text-sm">Jansen</span>
                     </div>
                 </div>
